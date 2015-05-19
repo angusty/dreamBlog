@@ -1,0 +1,5 @@
+yang_bo_dream_blog_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: YangBoDreamBlogBundle:Default:index }
+    requirements:
+        _method: get|post
