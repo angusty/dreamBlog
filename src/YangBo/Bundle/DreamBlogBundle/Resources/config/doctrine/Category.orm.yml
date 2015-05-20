@@ -1,0 +1,36 @@
+YangBo\Bundle\DreamBlogBundle\Entity\Category:
+    type: entity
+    talbe: category
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 200
+        pid:
+            type: integer
+        updated_at:
+            type: datetime
+            nullable: true
+        created_at:
+            type: datetime
+#    manyToMany:
+#        articles:
+#            targetEntity: Article
+#            inversedBy: categories
+#            joinTable:
+#                name: category_article
+#                JoinColumns:
+#                    category_id:
+#                        referencedColumnName: id
+#                inverseJoinColumns:
+#                    article_id:
+#                        referencedColumnName: id
+
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: categories

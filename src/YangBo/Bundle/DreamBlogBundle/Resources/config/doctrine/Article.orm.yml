@@ -1,0 +1,49 @@
+YangBo\Bundle\DreamBlogBundle\Entity\Article:
+    type: entity
+    table: article
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        content:
+            type: text
+        tag:
+            type: string
+            length: 255
+            nullable: true
+#        user_id:
+#            type: integer
+#        category_id:
+#            type: integer
+        page_view_count:
+            type: integer
+        updated_at:
+            type: datetime
+            nullable: true
+        created_at:
+            type: datetime
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: articles
+            JoinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        categories:
+            targetEntity: Category
+            inversedBy: articles
+            joinTable:
+                name: article_category
+                joinColumns:
+                    article_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    category_id:
+                        referencedColumnName: id
+
