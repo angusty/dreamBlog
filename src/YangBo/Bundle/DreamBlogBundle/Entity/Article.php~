@@ -49,6 +49,18 @@ class Article
      */
     private $user;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $categories;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -219,5 +231,38 @@ class Article
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Category $categories
+     * @return Article
+     */
+    public function addCategory(\YangBo\Bundle\DreamBlogBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Category $categories
+     */
+    public function removeCategory(\YangBo\Bundle\DreamBlogBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

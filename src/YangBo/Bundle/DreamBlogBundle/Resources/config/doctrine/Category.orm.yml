@@ -1,6 +1,6 @@
 YangBo\Bundle\DreamBlogBundle\Entity\Category:
     type: entity
-    talbe: category
+    table: category
     id:
         id:
             type: integer
