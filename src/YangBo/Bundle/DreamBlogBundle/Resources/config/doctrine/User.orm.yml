@@ -1,0 +1,35 @@
+YangBo\Bundle\DreamBlogBundle\Entity\User:
+    type: entity
+    table: user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 40
+        password:
+            type: string
+            length: 200
+        salt:
+            type: string
+            length: 200
+            nullable: true
+        nickname:
+            type: string
+            nullable: true
+            length: 40
+        sex:
+            type: boolean
+            nullable: true
+        updated_at:
+            nullable: true
+            type: datetime
+        created_at:
+            type: datetime
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: user
