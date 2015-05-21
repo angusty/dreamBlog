@@ -1,5 +1,3 @@
-yang_bo_dream_blog_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: YangBoDreamBlogBundle:Default:index }
-    requirements:
-        _method: get|post
+yang_bo_dream_blog_default:
+    resource: '@YangBoDreamBlogBundle/Resources/config/routing/default.yml'
+    prefix: /

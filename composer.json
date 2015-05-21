@@ -19,7 +19,8 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "doctrine/data-fixtures": "1.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -57,5 +58,9 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }
-    }
+    },
+    "repositories": [
+        {"type": "composer", "url": "http://packagist.jp/"},
+        {"packagist": false}
+    ]
 }

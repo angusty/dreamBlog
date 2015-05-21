@@ -10,6 +10,7 @@ YangBo\Bundle\DreamBlogBundle\Entity\User:
         username:
             type: string
             length: 40
+            unique: true
         password:
             type: string
             length: 200
