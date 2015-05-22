@@ -10,3 +10,7 @@ security:
 
         default:
             anonymous: ~
+    encoders:
+#        Symfony\Component\Security\Core\User\User: sha512
+        YangBo\Bundle\DreamBlogBundle\Entity\User: sha512
+

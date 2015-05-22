@@ -181,4 +181,15 @@ class Category
     {
         return $this->articles;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtOnPrePersist()
+    {
+        // Add your code here
+        if (null == $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime());
+        }
+    }
 }

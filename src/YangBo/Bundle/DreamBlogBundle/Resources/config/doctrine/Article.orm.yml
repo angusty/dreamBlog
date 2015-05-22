@@ -47,3 +47,5 @@ YangBo\Bundle\DreamBlogBundle\Entity\Article:
                     category_id:
                         referencedColumnName: id
 
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtOnPrepersist ]

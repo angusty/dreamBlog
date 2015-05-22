@@ -1,6 +1,7 @@
 YangBo\Bundle\DreamBlogBundle\Entity\User:
     type: entity
     table: user
+
     id:
         id:
             type: integer
@@ -34,3 +35,5 @@ YangBo\Bundle\DreamBlogBundle\Entity\User:
         articles:
             targetEntity: Article
             mappedBy: user
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtOnPrePersist ]

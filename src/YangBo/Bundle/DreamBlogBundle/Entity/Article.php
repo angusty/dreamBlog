@@ -265,4 +265,15 @@ class Article
     {
         return $this->categories;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtOnPrepersist()
+    {
+        // Add your code here
+        if (null == $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime());
+        }
+    }
 }

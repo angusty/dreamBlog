@@ -3,11 +3,16 @@
 namespace YangBo\Bundle\DreamBlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User
+class User implements
+    UserInterface,
+    EncoderAwareInterface
 {
     /**
      * @var integer
@@ -264,5 +269,63 @@ class User
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtOnPrePersist()
+    {
+        // Add your code here
+        if (null == $this->getCreatedAt()) {
+//            $this->created_at = new \DateTime();
+            $this->setCreatedAt(new \DateTime());
+        }
+    }
+
+    /**
+     * Gets the name of the encoder used to encode the password.
+     *
+     * If the method returns null, the standard way to retrieve the encoder
+     * will be used instead.
+     *
+     * @return string
+     */
+    public function getEncoderName()
+    {
+        // TODO: Implement getEncoderName() method.
+        return null;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return Role[] The user roles
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

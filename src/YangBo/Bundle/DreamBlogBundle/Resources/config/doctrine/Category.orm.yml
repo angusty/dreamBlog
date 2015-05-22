@@ -34,3 +34,5 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
         articles:
             targetEntity: Article
             mappedBy: categories
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtOnPrePersist ]
