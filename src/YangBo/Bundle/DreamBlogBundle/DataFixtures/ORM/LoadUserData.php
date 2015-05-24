@@ -43,6 +43,7 @@ class LoadUserData extends AbstractFixture implements
         $now = new \DateTime('-2 week');
         $user->setCreatedAt($now);
         $manager->persist($user);
+        $this->addReference('user1', $user);
 
         $user = new User();
         $user->setUsername('李华2');
@@ -60,6 +61,7 @@ class LoadUserData extends AbstractFixture implements
         $now = new \DateTime('-2 month');
         $user->setCreatedAt($now);
         $manager->persist($user);
+        $this->addReference('user2', $user);
 
         $user = new User();
         $user->setUsername('yangbo');
@@ -77,6 +79,7 @@ class LoadUserData extends AbstractFixture implements
         $now = new \DateTime('-2 day');
         $user->setCreatedAt($now);
         $manager->persist($user);
+        $this->addReference('user3', $user);
 
         $user = new User();
         $user->setUsername('yangbo2');
@@ -94,6 +97,7 @@ class LoadUserData extends AbstractFixture implements
         $now = new \DateTime('-2 day');
         $user->setCreatedAt($now);
         $manager->persist($user);
+        $this->addReference('user4', $user);
 
         $manager->flush();
         
