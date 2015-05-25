@@ -22,6 +22,14 @@ YangBo\Bundle\DreamBlogBundle\Entity\Article:
 #            type: integer
         page_view_count:
             type: integer
+            nullable: false
+            options:
+                default: 1
+        is_recommend:
+            type: boolean
+            nullable: false
+            options:
+                default: false
         updated_at:
             type: datetime
             nullable: true
@@ -48,4 +56,4 @@ YangBo\Bundle\DreamBlogBundle\Entity\Article:
                         referencedColumnName: id
 
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtOnPrepersist ]
+        prePersist: [ setCreatedAtOnPrepersist, setIsRecommendOnPrepersist ]

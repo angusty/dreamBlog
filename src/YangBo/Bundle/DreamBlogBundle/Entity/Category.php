@@ -20,10 +20,15 @@ class Category
     private $name;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $pid;
+    private $children;
 
+    /**
+     * @var \YangBo\Bundle\DreamBlogBundle\Entity\Category
+     */
+    private $parent;
+    
     /**
      * @var \DateTime
      */
@@ -81,26 +86,59 @@ class Category
     }
 
     /**
-     * Set pid
+     * Add children
      *
-     * @param integer $pid
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Category $children
      * @return Category
      */
-    public function setPid($pid)
+    public function addChild(\YangBo\Bundle\DreamBlogBundle\Entity\Category $children)
     {
-        $this->pid = $pid;
+        $this->children[] = $children;
 
         return $this;
     }
 
     /**
-     * Get pid
+     * Remove children
      *
-     * @return integer 
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Category $children
      */
-    public function getPid()
+    public function removeChild(\YangBo\Bundle\DreamBlogBundle\Entity\Category $children)
     {
-        return $this->pid;
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Category $parent
+     * @return Category
+     */
+    public function setParent(\YangBo\Bundle\DreamBlogBundle\Entity\Category $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \YangBo\Bundle\DreamBlogBundle\Entity\Category
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**

@@ -32,7 +32,7 @@ class Article
     /**
      * @var integer
      */
-    private $page_view_count;
+    private $page_view_count=0;
 
     /**
      * @var \DateTime
@@ -60,6 +60,7 @@ class Article
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->getIsRecommend() === null ? $this->setIsRecommend(true) : $this->getIsRecommend();
     }
 
     /**
@@ -272,8 +273,45 @@ class Article
     public function setCreatedAtOnPrepersist()
     {
         // Add your code here
-        if (null == $this->getCreatedAt()) {
+        if (null === $this->getCreatedAt()) {
             $this->setCreatedAt(new \DateTime());
         }
+    }
+    
+    /**
+     * @var boolean
+     */
+    private $is_recommend = false;
+
+
+    /**
+     * Set is_recommend
+     *
+     * @param boolean $isRecommend
+     * @return Article
+     */
+    public function setIsRecommend($isRecommend)
+    {
+        $this->is_recommend = $isRecommend;
+
+        return $this;
+    }
+
+    /**
+     * Get is_recommend
+     *
+     * @return boolean 
+     */
+    public function getIsRecommend()
+    {
+        return $this->is_recommend;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setIsRecommendOnPrepersist()
+    {
+        // Add your code here
     }
 }

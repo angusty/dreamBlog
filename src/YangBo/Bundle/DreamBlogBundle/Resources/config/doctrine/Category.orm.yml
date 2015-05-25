@@ -10,8 +10,8 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
         name:
             type: string
             length: 200
-        pid:
-            type: integer
+#        pid:
+#            type: integer
         updated_at:
             type: datetime
             nullable: true
@@ -34,5 +34,16 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
         articles:
             targetEntity: Article
             mappedBy: categories
+    oneToMany:
+        children:
+            targetEntity: Category
+            mappedBy: parent
+    manyToOne:
+        parent:
+            targetEntity: Category
+            inversedBy: childen
+#            joinColumns:
+#                pid:
+#                    referencedColumnName: id
     lifecycleCallbacks:
         prePersist: [ setCreatedAtOnPrePersist ]
