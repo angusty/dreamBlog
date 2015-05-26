@@ -27,6 +27,11 @@ class Article
     /**
      * @var string
      */
+    private $cover_image;
+
+    /**
+     * @var string
+     */
     private $tag;
 
     /**
@@ -307,11 +312,27 @@ class Article
         return $this->is_recommend;
     }
 
+
     /**
-     * @ORM\PrePersist
+     * Set cover_image
+     *
+     * @param string $coverImage
+     * @return Article
      */
-    public function setIsRecommendOnPrepersist()
+    public function setCoverImage($coverImage)
     {
-        // Add your code here
+        $this->cover_image = $coverImage;
+
+        return $this;
+    }
+
+    /**
+     * Get cover_image
+     *
+     * @return string 
+     */
+    public function getCoverImage()
+    {
+        return $this->cover_image;
     }
 }

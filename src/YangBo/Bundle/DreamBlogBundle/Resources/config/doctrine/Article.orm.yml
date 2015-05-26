@@ -12,6 +12,10 @@ YangBo\Bundle\DreamBlogBundle\Entity\Article:
             length: 255
         content:
             type: text
+        cover_image:
+            type: string
+            length: 255
+            nullable: true
         tag:
             type: string
             length: 255
@@ -56,4 +60,4 @@ YangBo\Bundle\DreamBlogBundle\Entity\Article:
                         referencedColumnName: id
 
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtOnPrepersist, setIsRecommendOnPrepersist ]
+        prePersist: [ setCreatedAtOnPrepersist ]

@@ -38,7 +38,7 @@ class LoadArticleData extends AbstractFixture
         $this->setReference('article1', $article);
 
         $article = new Article();
-        $article->setTitle('轮中日关系');
+        $article->setTitle('论中日关系');
         $article->setContent('习近平强调，中日一衣带水，2000多年来，和平友好是两国人民心中的主旋律，两国人民互学互鉴，
             促进了各自发展，也为人类文明进步作出了重要贡献。
             近代以后，由于日本走上对外侵略扩张道路，中日两国经历了一段惨痛历史，给中国人民带来了深重灾难。两国老一代领导人以高度的政治智慧，
@@ -55,22 +55,37 @@ class LoadArticleData extends AbstractFixture
         $this->setReference('article2', $article);
 
         $article = new Article();
-        $article->setTitle('轮中日关系');
-        $article->setContent('习近平强调，中日一衣带水，2000多年来，和平友好是两国人民心中的主旋律，两国人民互学互鉴，
-            促进了各自发展，也为人类文明进步作出了重要贡献。
-            近代以后，由于日本走上对外侵略扩张道路，中日两国经历了一段惨痛历史，给中国人民带来了深重灾难。两国老一代领导人以高度的政治智慧，
-            作出重要政治决断，克服重重困难，实现了中日邦交正常化，并缔结了和平友好条约，开启了两国关系新纪元。中日两国一批有识之士曾为此积
-            极奔走，做了大量工作。历史证明，中日友好事业对两国和两国人民有利，对亚洲和世界有利，值得我们倍加珍惜和精心维护，继续付出不懈努力。
-            习近平指出，“德不孤，必有邻。”只要中日两国人民真诚友好、以德为邻，就一定能实现世代友好。中国高度重视发展中日关系。
-            我们愿同日方一道，在中日四个政治文件基础上，推进两国睦邻友好合作。');
-        $article->setTag('中国,日本');
+        $article->setTitle('React 介绍');
+        $article->setContent('React不多做介绍，就是Facebook的一个开源JS框架，专注的层面为View层，不包括数据访问层或者那种Hash路由
+            （不过React有插件支持），与Angularjs，Emberjs等大而全的框架不同，React专注的中心是Component，即组件，React认为一切页面
+            元素都可以抽象成组件，比如一个表单，或者表单中的某一项。states就是组件的可变属性，states的改变会触发组件的render函数，
+            react与其他mvvm框架的最大的不同点就是，react组件可以想象成一个状态机，状态的改变会重绘UI，然后根据 dom diff 算法来绘制UI，
+            而其他的mvvm框架则是对js对象的dirty check（Angularjs）或者defineProperty时指定的回调函数（Emberjs），
+            因此，状态机制与dom diff的存在声称React更快。');
+        $article->setTag('react,js');
 //        $article->setPageViewCount(22);
         $article->setCreatedAt(new \DateTime());
         $article->setUser($this->getReference('user3'));
         $article->addCategory($this->getReference('category3'));
         $article->setIsRecommend(true);
         $manager->persist($article);
-        $this->setReference('article2', $article);
+        $this->setReference('article3', $article);
+
+        $article = new Article();
+        $article->setTitle('响应式设计');
+        $article->setContent('在响应式设计中，设备的宽度是不确定的，而有时需要根据宽度来设置高度，如上面的例子，想要一个与宽度相同的
+            高度的div，即一个正方形。原理：padding-top使用百分比时，计算的是父元素的宽度。利用这一点，使用padding-top:100%设置子元素
+            std-rect，然后给子元素的子元素content设置一个负数的margin-top:-100%，也使用百分比，这样，content元素里面的内容就会出现
+            在正方形中。为了使得内容不会撑开div，将content相对于std-rect定位，并设置std-rect为overflow:hidden。在上面的例子中，
+            还有一个clearfix的技巧值得记住。另外，CSS3的calc()好像也能解决这中问题');
+        $article->setTag('响应式,设计');
+//        $article->setPageViewCount(22);
+        $article->setCreatedAt(new \DateTime());
+        $article->setUser($this->getReference('user3'));
+        $article->addCategory($this->getReference('category4'));
+        $article->setIsRecommend(true);
+        $manager->persist($article);
+        $this->setReference('article4', $article);
 
         $manager->flush();
 
