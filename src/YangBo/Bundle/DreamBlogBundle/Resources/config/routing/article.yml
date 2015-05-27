@@ -1,0 +1,12 @@
+#yang_bo_dream_blog_article_show:
+#    path: /show/{id}.{_format}
+#    defaults: #{_controller: YangBoDreamBlogBundle:Article:show }
+#        _controller: YangBoDreamBlogBundle:Article:show
+#        _format: '%url_suffix_format%'
+#    requirements:
+#        _format: %url_suffix_format%
+
+yang_bo_dream_blog_article_show:
+    path: /show/{id}.%url_suffix_format%
+    defaults: #{_controller: YangBoDreamBlogBundle:Article:show }
+        _controller: YangBoDreamBlogBundle:Article:show

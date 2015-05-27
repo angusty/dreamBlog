@@ -1,3 +1,8 @@
-yang_bo_dream_blog_default:
-    resource: '@YangBoDreamBlogBundle/Resources/config/routing/default.yml'
-    prefix: /
+yang_bo_dream_blog_homepage:
+    path: /
+    defaults:
+        _controller: YangBoDreamBlogBundle:Default:index
+
+yang_bo_dream_blog_article:
+    resource: '@YangBoDreamBlogBundle/Resources/config/routing/article.yml'
+    prefix: /article

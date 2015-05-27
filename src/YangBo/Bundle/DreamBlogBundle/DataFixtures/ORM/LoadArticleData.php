@@ -30,7 +30,7 @@ class LoadArticleData extends AbstractFixture
             如今卖掉却只能比当年买下德赫亚时多赚200万镑，这笔交易无疑还是有些吃亏。但是由于德赫亚的合同只剩最后一年，因此曼联也没有多少主动权。');
         $article->setTag('曼联,皇马');
         $article->setPageViewCount(22);
-        $article->setCreatedAt(new \DateTime());
+        $article->setCreatedAt(new \DateTime('-3 day'));
         $article->setUser($this->getReference('user1'));
         $article->addCategory($manager->merge($this->getReference('category1')));
         $article->addCategory($manager->merge($this->getReference('category3')));
@@ -48,7 +48,7 @@ class LoadArticleData extends AbstractFixture
             我们愿同日方一道，在中日四个政治文件基础上，推进两国睦邻友好合作。');
         $article->setTag('中国,日本');
         $article->setPageViewCount(22);
-        $article->setCreatedAt(new \DateTime());
+        $article->setCreatedAt(new \DateTime('-4 day'));
         $article->setUser($this->getReference('user2'));
         $article->addCategory($this->getReference('category2'));
         $manager->persist($article);

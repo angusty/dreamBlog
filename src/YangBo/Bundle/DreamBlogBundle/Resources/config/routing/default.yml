@@ -1,4 +1,0 @@
-yang_bo_dream_blog_default_index:
-    path: /
-    defaults:
-        _controller: YangBoDreamBlogBundle:Default:index

@@ -1,0 +1,36 @@
+<div class="news">
+
+  {% block right_newest_articles %}
+    <h3>
+      <p>最新<span>文章</span></p>
+    </h3>
+    <ul class="rank">
+      {% for article in newest_articles if null != article %}
+        <li><a href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id }) }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endblock %}
+
+  {% block right_most_view_articles %}
+    <h3 class="ph">
+      <p>点击<span>排行</span></p>
+    </h3>
+    <ul class="paih">
+      {% for article in most_view_articles %}
+        <li><a href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id}) }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endblock %}
+
+  {% block right_links %}
+  <h3 class="links">
+    <p>友情<span>链接</span></p>
+  </h3>
+  <ul class="website">
+    <li><a href="/">个人博客</a></li>
+    <li><a href="/">谢泽文个人博客</a></li>
+    <li><a href="/">3DST技术网</a></li>
+    <li><a href="/">思衡网络</a></li>
+  </ul>
+  {% endblock %}
+</div>
