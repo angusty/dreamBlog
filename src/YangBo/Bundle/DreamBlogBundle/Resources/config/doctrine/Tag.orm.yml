@@ -1,0 +1,22 @@
+YangBo\Bundle\DreamBlogBundle\Entity\Tag:
+    type: entity
+    table: tag
+    repositoryClass: YangBo\Bundle\DreamBlogBundle\Entity\TagRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        tag_name:
+            type: string
+            length: 200
+        updated_at:
+            type: datetime
+            nullable: true
+        created_at:
+            type: datetime
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: tags

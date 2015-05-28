@@ -1,6 +1,7 @@
 YangBo\Bundle\DreamBlogBundle\Entity\Category:
     type: entity
     table: category
+    repositoryClass: YangBo\Bundle\DreamBlogBundle\Entity\CategoryRepository
     id:
         id:
             type: integer

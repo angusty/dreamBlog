@@ -1,7 +1,9 @@
 parameters:
+    # 推荐文章 显示 条数
+    recommend_articles_show_count: 8
     # 显示多少条 最新文章
-    newest_articles_show_count: 3
+    newest_articles_show_count: 5
     # 显示多少条 点击最多文章
     most_view_articles_show_count: 5
-
+    # url 后缀
     url_suffix_format: html

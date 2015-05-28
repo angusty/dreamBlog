@@ -29,10 +29,6 @@ class Article
      */
     private $cover_image;
 
-    /**
-     * @var string
-     */
-    private $tag;
 
     /**
      * @var integer
@@ -123,30 +119,7 @@ class Article
     {
         return $this->content;
     }
-
-    /**
-     * Set tag
-     *
-     * @param string $tag
-     * @return Article
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string 
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
+    
     /**
      * Set page_view_count
      *
@@ -334,5 +307,43 @@ class Article
     public function getCoverImage()
     {
         return $this->cover_image;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tags;
+
+
+    /**
+     * Add tags
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags
+     * @return Article
+     */
+    public function addTag(\YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags
+     */
+    public function removeTag(\YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -29,10 +29,6 @@ class Article
      */
     private $cover_image;
 
-    /**
-     * @var string
-     */
-    private $tag;
 
     /**
      * @var integer
@@ -123,30 +119,7 @@ class Article
     {
         return $this->content;
     }
-
-    /**
-     * Set tag
-     *
-     * @param string $tag
-     * @return Article
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string 
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
+    
     /**
      * Set page_view_count
      *

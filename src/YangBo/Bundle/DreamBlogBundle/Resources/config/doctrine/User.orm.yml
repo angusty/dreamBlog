@@ -1,7 +1,7 @@
 YangBo\Bundle\DreamBlogBundle\Entity\User:
     type: entity
     table: user
-
+    repositoryClass: YangBo\Bundle\DreamBlogBundle\Entity\UserRepository
     id:
         id:
             type: integer
