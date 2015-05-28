@@ -308,4 +308,42 @@ class Article
     {
         return $this->cover_image;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tags;
+
+
+    /**
+     * Add tags
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags
+     * @return Article
+     */
+    public function addTag(\YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags
+     */
+    public function removeTag(\YangBo\Bundle\DreamBlogBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
 }
