@@ -153,4 +153,5 @@ class Tag
     {
         return $this->articles;
     }
+
 }

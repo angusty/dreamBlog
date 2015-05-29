@@ -147,10 +147,22 @@ class Tag
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {
         return $this->articles;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtOnPrePersist()
+    {
+        // Add your code here
+        if (null === $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime());
+        }
     }
 }

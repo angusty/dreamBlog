@@ -21,3 +21,6 @@ YangBo\Bundle\DreamBlogBundle\Entity\Tag:
         articles:
             targetEntity: Article
             mappedBy: tags
+
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtOnPrePersist ]

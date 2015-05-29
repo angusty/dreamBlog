@@ -6,8 +6,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use YangBo\Bundle\DreamBlogBundle\Entity\Article;
 
-class LoadArticleData extends AbstractFixture
-    implements OrderedFixtureInterface
+class LoadArticleData extends AbstractFixture implements
+    OrderedFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager
@@ -28,10 +28,11 @@ class LoadArticleData extends AbstractFixture
             这让曼联无法接受，因为2011年曼联引进德赫亚时也花掉了1800万镑。不过这笔交易也并非没有转机，《每日镜报》称，如果皇马愿意将贝尔卖到曼联，
             那么红魔愿意接受对德赫亚2000万镑的报价。话虽如此，考虑到德赫亚如今的能力，曼联花费多年将他培养成世界级的门将，
             如今卖掉却只能比当年买下德赫亚时多赚200万镑，这笔交易无疑还是有些吃亏。但是由于德赫亚的合同只剩最后一年，因此曼联也没有多少主动权。');
-        $article->setTag('曼联,皇马');
         $article->setPageViewCount(22);
         $article->setCreatedAt(new \DateTime('-3 day'));
         $article->setUser($this->getReference('user1'));
+        $article->addTag($manager->merge($this->getReference('tag1')));
+        $article->addTag($manager->merge($this->getReference('tag2')));
         $article->addCategory($manager->merge($this->getReference('category1')));
         $article->addCategory($manager->merge($this->getReference('category3')));
         $manager->persist($article);
@@ -46,11 +47,12 @@ class LoadArticleData extends AbstractFixture
             极奔走，做了大量工作。历史证明，中日友好事业对两国和两国人民有利，对亚洲和世界有利，值得我们倍加珍惜和精心维护，继续付出不懈努力。
             习近平指出，“德不孤，必有邻。”只要中日两国人民真诚友好、以德为邻，就一定能实现世代友好。中国高度重视发展中日关系。
             我们愿同日方一道，在中日四个政治文件基础上，推进两国睦邻友好合作。');
-        $article->setTag('中国,日本');
         $article->setPageViewCount(22);
         $article->setCreatedAt(new \DateTime('-4 day'));
         $article->setUser($this->getReference('user2'));
         $article->addCategory($this->getReference('category2'));
+        $article->addTag($manager->merge($this->getReference('tag6')));
+        $article->addTag($manager->merge($this->getReference('tag7')));
         $manager->persist($article);
         $this->setReference('article2', $article);
 
@@ -62,11 +64,12 @@ class LoadArticleData extends AbstractFixture
             react与其他mvvm框架的最大的不同点就是，react组件可以想象成一个状态机，状态的改变会重绘UI，然后根据 dom diff 算法来绘制UI，
             而其他的mvvm框架则是对js对象的dirty check（Angularjs）或者defineProperty时指定的回调函数（Emberjs），
             因此，状态机制与dom diff的存在声称React更快。');
-        $article->setTag('react,js');
+
 //        $article->setPageViewCount(22);
         $article->setCreatedAt(new \DateTime());
         $article->setUser($this->getReference('user3'));
         $article->addCategory($this->getReference('category3'));
+        $article->addTag($manager->merge($this->getReference('tag3')));
         $article->setIsRecommend(true);
         $manager->persist($article);
         $this->setReference('article3', $article);
@@ -78,11 +81,13 @@ class LoadArticleData extends AbstractFixture
             std-rect，然后给子元素的子元素content设置一个负数的margin-top:-100%，也使用百分比，这样，content元素里面的内容就会出现
             在正方形中。为了使得内容不会撑开div，将content相对于std-rect定位，并设置std-rect为overflow:hidden。在上面的例子中，
             还有一个clearfix的技巧值得记住。另外，CSS3的calc()好像也能解决这中问题');
-        $article->setTag('响应式,设计');
+
 //        $article->setPageViewCount(22);
         $article->setCreatedAt(new \DateTime());
         $article->setUser($this->getReference('user3'));
         $article->addCategory($this->getReference('category4'));
+        $article->addTag($manager->merge($this->getReference('tag8')));
+        $article->addTag($manager->merge($this->getReference('tag9')));
         $article->setIsRecommend(true);
         $manager->persist($article);
         $this->setReference('article4', $article);
@@ -99,7 +104,7 @@ class LoadArticleData extends AbstractFixture
     public function getOrder()
     {
         // TODO: Implement getOrder() method.
-        return 3;
+        return 4;
     }
 
 }
