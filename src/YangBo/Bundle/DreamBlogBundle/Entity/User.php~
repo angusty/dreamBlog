@@ -277,7 +277,7 @@ class User implements
     public function setCreatedAtOnPrePersist()
     {
         // Add your code here
-        if (null == $this->getCreatedAt()) {
+        if (null === $this->getCreatedAt()) {
 //            $this->created_at = new \DateTime();
             $this->setCreatedAt(new \DateTime());
         }

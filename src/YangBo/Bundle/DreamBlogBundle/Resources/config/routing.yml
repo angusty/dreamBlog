@@ -6,3 +6,7 @@ yang_bo_dream_blog_homepage:
 yang_bo_dream_blog_article:
     resource: '@YangBoDreamBlogBundle/Resources/config/routing/article.yml'
     prefix: /article
+
+yang_bo_dream_blog_tag:
+    resource: '@YangBoDreamBlogBundle/Resources/config/routing/tag.yml'
+    prefix: /tag

@@ -1,0 +1,5 @@
+yang_bo_dream_blog_tag_index:
+    path: /
+    defaults:
+        _controller: YangBoDreamBlogBundle:Tag:index
+
