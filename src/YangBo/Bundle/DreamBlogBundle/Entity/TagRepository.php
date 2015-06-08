@@ -17,7 +17,7 @@ class TagRepository extends EntityRepository
      * @param $tag
      * @return mixed
      */
-    public function countArticleWithTag($tag)
+    public function countArticleWithTag($tag = '')
     {
         $qb = $this->createQueryBuilder('tag');
         $qb = $qb
@@ -32,14 +32,45 @@ class TagRepository extends EntityRepository
                 ->andWhere('tag.tag_name LIKE :tag_name')
                 ->setParameter('tag_name', '%' . $tag . '%');
         }
-        $count = $qb
+        $query = $qb
             ->getQuery()
-            ->getSingleScalarResult();
+           ;
+        $count = $query->getSingleScalarResult();
         return $count;
     }
 
-    public function getArticleWithTag($tag)
+    public function getArticleWithTag($tag = '', $offset = 0, $limit = '')
     {
-
+        $qb = $this
+            ->createQueryBuilder('tag')
+            ->select('tag, articles')
+            ->leftjoin('tag.articles', 'articles')
+            ->orderBy('articles.id', 'DESC')
+        ;
+        if (!empty($tag)) {
+            $qb
+                ->andWhere('tag.tag_name LIKE :tag_name')
+                ->setParameter('tag_name', '%' . $tag . '%');
+        }
+        if (!empty($offset)) {
+            $qb->setFirstResult($offset);
+        }
+        if (!empty($limit)) {
+            $qb->setMaxResults($limit);
+        }
+        $query = $qb
+            ->getQuery()
+        ;
+        $tag = '';
+        try {
+            $tag = $query->getSingleResult();
+        } catch (NoResultException $e) {
+            $tag = '';
+        }
+        $articles = '';
+        if (is_object($tag)) {
+            $articles = $tag->getArticles();
+        }
+        return $articles;
     }
 }

@@ -11,8 +11,8 @@ class TagController extends Controller
     {
         $max_tags_on_index = $this->getParameter('max_tags_on_index');
         $em = $this->getDoctrine()->getManager();
-        $count = $em
-            ->getRepository('YangBoDreamBlogBundle:Tag')
+        $tag_repository = $em->getRepository('YangBoDreamBlogBundle:Tag');
+        $count = $tag_repository
             ->countArticleWithTag($tag)
         ;
         // 总页数
@@ -21,42 +21,12 @@ class TagController extends Controller
         $previous_page = $page-1 > 0 ? $page-1 : 1;
         // 下一页
         $next_page = $page < $last_page_number ? $page+1 : $last_page_number;
-        $qb = $em
-            ->getRepository('YangBoDreamBlogBundle:Tag')
-            ->createQueryBuilder('tag')
-            ->select('tag, articles')
-            ->leftjoin('tag.articles', 'articles')
-//            ->where($qb->expr()->like('tag.tag_name', ':tag_name'))
-//            ->where('tag.tag_name LIKE :tag_name')
-//            ->setParameter('tag_name', '%' . $tag . '%')
-            ->orderBy('articles.created_at', 'DESC')
-        ;
-        if (!empty($tag)) {
-            $qb
-                ->andWhere('tag.tag_name LIKE :tag_name')
-                ->setParameter('tag_name', '%' . $tag . '%');
-        }
-        $offset = $page - 1;
-        $limit = $max_tags_on_index;
-        if (!empty($offset)) {
-            $qb->setFirstResult($offset);
-        }
-        if (!empty($limit)) {
-            $qb->setMaxResults($limit);
-        }
-        $query = $qb
-//            ->select('tag')
-            ->getQuery()
-           ;
 
-        $tag = '';
-        try {
-            $tag = $query->getSingleResult();
-        } catch (NoResultException $e) {
-            $tag = '';
-        }
-        $articles = $tag->getArticles();
-        dump($tag->getArticles());
+        $articles = $tag_repository
+            ->getArticleWithTag($tag, $page-1, $max_tags_on_index);
+        dump($count);
+        dump($last_page_number);
+        dump($articles);
 //        foreach ($articles as $key => $value) {
 //            dump($value);
 //        }

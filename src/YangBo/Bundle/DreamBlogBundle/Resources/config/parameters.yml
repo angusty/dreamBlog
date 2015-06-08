@@ -8,4 +8,4 @@ parameters:
     # url 后缀
     url_suffix_format: html
     # 分页 每页显示多少条
-    max_tags_on_index: 5
+    max_tags_on_index: 2
