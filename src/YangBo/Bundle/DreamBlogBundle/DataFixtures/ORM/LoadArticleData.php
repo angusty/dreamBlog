@@ -33,6 +33,7 @@ class LoadArticleData extends AbstractFixture implements
         $article->setUser($this->getReference('user1'));
         $article->addTag($manager->merge($this->getReference('tag1')));
         $article->addTag($manager->merge($this->getReference('tag2')));
+        $article->addTag($manager->merge($this->getReference('tag10')));
         $article->addCategory($manager->merge($this->getReference('category1')));
         $article->addCategory($manager->merge($this->getReference('category3')));
         $manager->persist($article);
@@ -53,6 +54,7 @@ class LoadArticleData extends AbstractFixture implements
         $article->addCategory($this->getReference('category2'));
         $article->addTag($manager->merge($this->getReference('tag6')));
         $article->addTag($manager->merge($this->getReference('tag7')));
+        $article->addTag($manager->merge($this->getReference('tag10')));
         $manager->persist($article);
         $this->setReference('article2', $article);
 
@@ -70,6 +72,7 @@ class LoadArticleData extends AbstractFixture implements
         $article->setUser($this->getReference('user3'));
         $article->addCategory($this->getReference('category3'));
         $article->addTag($manager->merge($this->getReference('tag3')));
+        $article->addTag($manager->merge($this->getReference('tag10')));
         $article->setIsRecommend(true);
         $manager->persist($article);
         $this->setReference('article3', $article);
@@ -88,9 +91,29 @@ class LoadArticleData extends AbstractFixture implements
         $article->addCategory($this->getReference('category4'));
         $article->addTag($manager->merge($this->getReference('tag8')));
         $article->addTag($manager->merge($this->getReference('tag9')));
+        $article->addTag($manager->merge($this->getReference('tag10')));
         $article->setIsRecommend(true);
         $manager->persist($article);
         $this->setReference('article4', $article);
+
+        $article = new Article();
+        $article->setTitle('响应式设计2');
+        $article->setContent('在响应式设计2中，设备的宽度是不确定的，而有时需要根据宽度来设置高度，如上面的例子，想要一个与宽度相同的
+            高度的div，即一个正方形。原理：padding-top使用百分比时，计算的是父元素的宽度。利用这一点，使用padding-top:100%设置子元素
+            std-rect，然后给子元素的子元素content设置一个负数的margin-top:-100%，也使用百分比，这样，content元素里面的内容就会出现
+            在正方形中。为了使得内容不会撑开div，将content相对于std-rect定位，并设置std-rect为overflow:hidden。在上面的例子中，
+            还有一个clearfix的技巧值得记住。另外，CSS3的calc()好像也能解决这中问题');
+
+//        $article->setPageViewCount(22);
+        $article->setCreatedAt(new \DateTime());
+        $article->setUser($this->getReference('user2'));
+        $article->addCategory($this->getReference('category3'));
+        $article->addTag($manager->merge($this->getReference('tag8')));
+        $article->addTag($manager->merge($this->getReference('tag9')));
+        $article->addTag($manager->merge($this->getReference('tag10')));
+        $article->setIsRecommend(true);
+        $manager->persist($article);
+        $this->setReference('article5', $article);
 
         $manager->flush();
 

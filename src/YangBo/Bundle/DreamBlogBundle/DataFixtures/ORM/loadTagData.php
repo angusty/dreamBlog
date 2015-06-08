@@ -62,6 +62,11 @@ class LoadTagData extends AbstractFixture implements
         $manager->persist($tag);
         $this->setReference('tag9', $tag);
 
+        $tag = new Tag();
+        $tag->setTagName('通用');
+        $manager->persist($tag);
+        $this->setReference('tag10', $tag);
+
 
         $manager->flush();
     }
