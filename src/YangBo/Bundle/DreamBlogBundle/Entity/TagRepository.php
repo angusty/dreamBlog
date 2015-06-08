@@ -12,4 +12,34 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+    /**
+     * 统计某个标记的文章条数
+     * @param $tag
+     * @return mixed
+     */
+    public function countArticleWithTag($tag)
+    {
+        $qb = $this->createQueryBuilder('tag');
+        $qb = $qb
+            ->select('COUNT(articles)')
+            ->leftjoin('tag.articles', 'articles')
+//            ->where($qb->expr()->like('tag.tag_name', ':tag_name'))
+//            ->setParameter('tag_name', '%' . $tag . '%')
+//            ->getQuery()
+        ;
+        if (!empty($tag)) {
+            $qb
+                ->andWhere('tag.tag_name LIKE :tag_name')
+                ->setParameter('tag_name', '%' . $tag . '%');
+        }
+        $count = $qb
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $count;
+    }
+
+    public function getArticleWithTag($tag)
+    {
+
+    }
 }

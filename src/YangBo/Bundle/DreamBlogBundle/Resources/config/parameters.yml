@@ -7,3 +7,5 @@ parameters:
     most_view_articles_show_count: 5
     # url 后缀
     url_suffix_format: html
+    # 分页 每页显示多少条
+    max_tags_on_index: 5
