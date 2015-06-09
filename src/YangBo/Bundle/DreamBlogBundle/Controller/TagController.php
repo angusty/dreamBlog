@@ -23,9 +23,17 @@ class TagController extends Controller
         $next_page = $page < $last_page_number ? $page+1 : $last_page_number;
         // 分页 偏移量 切记： 分页总是从第一页开始 而数据库的偏移量 默认从0开始
         $offset = $max_tags_on_index * ($page-1);
-        $articles = $tag_repository
-            ->getArticleWithTag($tag, $offset, $max_tags_on_index);
-        dump($articles);
-        return $this->render('YangBoDreamBlogBundle:Tag:index.html.twig');
+        $tag_articles = $tag_repository
+            ->getArticleWithTag($tag, $offset, $max_tags_on_index)
+        ;
+        return $this->render('YangBoDreamBlogBundle:Tag:index.html.twig',
+            array(
+                'tag_articles' => $tag_articles,
+                'last_page_number' => $last_page_number,
+                'page' => $page,
+                'previous_page' => $previous_page,
+                'next_page' => $next_page
+            )
+        );
     }
 }

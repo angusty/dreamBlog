@@ -13,26 +13,39 @@
 
     <div class="newblog left">
 
-      <h2>程序员请放下你的技术情节，与你的同伴一起进步</h2>
-      <p class="dateview">
-        <span>发布时间：2013-11-04</span><span>作者：杨青</span>
-        <span>分类：[<a href="/news/life/">程序人生</a>]</span>
-      </p>
-      <figure><img src="{{ asset('bundles/yangbodreamblog') }}/images/001.png"></figure>
-      <ul class="nlist">
-        <p>如果说掌握一门赖以生计的技术是技术人员要学会的第一课的话， 那么我觉得技术人员要真正学会的第二课，不是技术，而是业务、交流与协作，学会关心其他工作伙伴的工作情况和进展...</p>
-        <a title="/" href="/" target="_blank" class="readmore">阅读全文>></a>
-      </ul>
+      {% for tag in tag_articles %}
+        {% for article in tag.articles %}
+          <h2>{{ article.title }}</h2>
+          <p class="dateview">
+            <span>发布时间：{{ article.createdat|time_diff }}</span><span>作者：{{ article.user.nickname }}</span>
+            <span>分类：
+              [
+              {% for category in article.categories %}
+                <a href="/news/life/">{{ category.name }}</a>
+                {% if loop.last != true %}
+                  ,
+                {% endif %}
+              {% endfor %}
+              ]
+            </span>
+          </p>
+          <figure><img src="{{ asset('bundles/yangbodreamblog') }}/images/001.png"></figure>
+          <ul class="nlist">
+            <p>{{ article.content|slice(0, 80) }}</p>
+            <a title="/" href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id}) }}" target="_blank" class="readmore">阅读全文>></a>
+          </ul>
+        {% endfor %}
+      {% endfor %}
 
       <div class="line"></div>
       <div class="blank"></div>
 
       <div class="page">
         <a title="Total record">
-          <b>41</b>
+          <b>{{ last_page_number }}</b>
         </a>
-        <b>1</b>
-        <a href="/news/s/index_2.html">2</a>
+        <b>{{ page }}</b>
+        <a href="{{ path('yang_bo_dream_blog_tag_index', {'tag': app.request.get('tag'), 'page': app.request.get('page')}) }}">2</a>
         <a href="/news/s/index_2.html">&gt;</a>
         <a href="/news/s/index_2.html">&gt;&gt;</a>
       </div>

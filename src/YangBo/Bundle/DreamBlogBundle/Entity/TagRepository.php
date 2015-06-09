@@ -44,14 +44,17 @@ class TagRepository extends EntityRepository
     {
         $qb = $this
             ->createQueryBuilder('tag')
-            ->select('tag, articles')
-            ->leftjoin('tag.articles', 'articles')
+            ->select('tag, articles, user, categories')
+            ->leftJoin('tag.articles', 'articles')
+            ->leftJoin('articles.user', 'user')
+            ->leftJoin('articles.categories', 'categories')
             ->orderBy('articles.id', 'DESC')
         ;
         if (!empty($tag)) {
             $qb
                 ->andWhere('tag.tag_name LIKE :tag_name')
-                ->setParameter('tag_name', '%' . $tag . '%');
+                ->setParameter('tag_name', '%' . $tag . '%')
+            ;
         }
         if (!empty($offset)) {
             $qb->setFirstResult($offset);
