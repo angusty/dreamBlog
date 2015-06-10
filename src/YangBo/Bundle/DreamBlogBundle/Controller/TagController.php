@@ -32,7 +32,8 @@ class TagController extends Controller
                 'last_page_number' => $last_page_number,
                 'page' => $page,
                 'previous_page' => $previous_page,
-                'next_page' => $next_page
+                'next_page' => $next_page,
+                'last_page_number' => $last_page_number
             )
         );
     }
