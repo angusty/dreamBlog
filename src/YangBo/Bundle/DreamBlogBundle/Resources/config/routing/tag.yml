@@ -1,8 +1,9 @@
 yang_bo_dream_blog_tag_index:
-    path: /{tag}/{page}
+#    path: /{tag}/{page}
+    path: /
     defaults:
         _controller: YangBoDreamBlogBundle:Tag:index
-        tag: ''
-        page: 1
+#        tag: ''
+#        page: 1
     requirements:
         _method: get

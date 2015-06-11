@@ -3,6 +3,7 @@
 namespace YangBo\Bundle\DreamBlogBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * ArticleRepository
@@ -48,6 +49,46 @@ class ArticleRepository extends EntityRepository
             ->setMaxResults($count)
             ->getResult();
         return $most_view_articles;
+    }
+
+    public function countArticleWithTag($tag = '')
+    {
+        $qb = $this->createQueryBuilder('article')
+            ->select('COUNT(DISTINCT article.id)')
+            ->leftJoin('article.tags', 'tags')
+            ;
+        if (!empty($tag)) {
+            $qb
+                ->andWhere('tags.tag_name LIKE :tag_name')
+                ->setParameter('tag_name', '%' . $tag . '%');
+        }
+        $query = $qb->getQuery();
+        return $query->getSingleScalarResult();
+
+
+        //native sql
+//        $where = 'WHERE 1';
+//        if (!empty($tag)) {
+//            $where .= " AND t.tag_name LIKE :tag_name";
+//        }
+//
+//        $sql = "SELECT COUNT(*) AS count, article.id AS id FROM article
+//                LEFT JOIN article_tag at ON article.id = at.article_id
+//                LEFT JOIN tag t ON t.id = at.tag_id {$where}
+//                GROUP BY article.id";
+//        $rsm = new ResultSetMapping();
+//        $rsm->addScalarResult('id', 'id');
+//        $rsm->addScalarResult('count', 'count');
+//        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+//        if (!empty($tag)) {
+//            $query->setParameter('tag_name', $tag);
+//        }
+//        return $query->getResult();
+    }
+
+    public function getArticleWithTag($tag = '', $offset = 0, $limit = '')
+    {
+
     }
 
 
