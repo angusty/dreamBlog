@@ -32,9 +32,7 @@ class DefaultController extends Controller
         return $this->render(
             'YangBoDreamBlogBundle:Default:index.html.twig',
             array(
-                'recommend_articles' => $recommend_articles,
-//                'newest_articles' => $newest_articles,
-//                'most_view_articles' => $most_view_articles
+                'recommend_articles' => $recommend_articles
             )
         );
     }
