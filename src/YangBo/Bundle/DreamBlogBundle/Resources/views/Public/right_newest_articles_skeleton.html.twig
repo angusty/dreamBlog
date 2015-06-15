@@ -1,0 +1,10 @@
+{% block right_newest_articles %}
+  <h3>
+    <p>最新<span>文章</span></p>
+  </h3>
+  <ul class="rank">
+    {% for article in newest_articles if null != article %}
+      <li><a href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id }) }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

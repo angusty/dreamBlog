@@ -72,9 +72,16 @@
         </ul>
       </div>
 
-        {{ render(controller(
-        'YangBoDreamBlogBundle:Article:rightNewsSkeleton'))
-        }}
+      {{ render(controller('YangBoDreamBlogBundle:Article:rightNewsNoLinksSkeleton')) }}
+      {#<div class="news">#}
+        {#{{ render(controller(#}
+          {#'YangBoDreamBlogBundle:Article:rightNewestArticlesSkeleton'))#}
+        {#}}#}
+
+        {#{{ render(controller(#}
+          {#'YangBoDreamBlogBundle:Article:rightMostViewArticlesSkeleton'))#}
+        {#}}#}
+      {#</div>#}
 
       <div class="visitors">
         <h3><p>最近访客</p></h3>
