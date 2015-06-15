@@ -68,9 +68,16 @@
       {#{% embed '@YangBoDreamBlog/Public/right_news_skeleton.html.twig' %}#}
       {#{% endembed %}#}
 
-      {{ render(controller(
-        'YangBoDreamBlogBundle:Article:rightNewsSkeleton'))
-      }}
+      <div class="news">
+        {{ render(controller(
+          'YangBoDreamBlogBundle:Article:rightNewestArticlesSkeleton'))
+        }}
+
+        {{ render(controller(
+          'YangBoDreamBlogBundle:Article:rightMostViewArticlesSkeleton'))
+        }}
+      </div>
+
 
       <div class="visitors">
         <h3>

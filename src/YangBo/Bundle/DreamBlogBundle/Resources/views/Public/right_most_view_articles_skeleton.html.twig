@@ -1,0 +1,10 @@
+{% block right_most_view_articles %}
+  <h3 class="ph">
+    <p>点击<span>排行</span></p>
+  </h3>
+  <ul class="paih">
+    {% for article in most_view_articles %}
+      <li><a href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id}) }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

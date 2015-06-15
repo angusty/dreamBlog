@@ -13,8 +13,8 @@
 
     <div class="newblog left">
 
-      {% for tag in tag_articles %}
-        {% for article in tag.articles %}
+      {% for article in tag_articles %}
+        {#{% for key,article in articles  if key !='t' %}#}
           <h2>{{ article.title }}</h2>
           <p class="dateview">
             <span>发布时间：{{ article.createdat|time_diff }}</span><span>作者：{{ article.user.nickname }}</span>
@@ -34,7 +34,7 @@
             <p>{{ article.content|slice(0, 80) }}</p>
             <a title="/" href="{{ path('yang_bo_dream_blog_article_show', {'id': article.id}) }}" target="_blank" class="readmore">阅读全文>></a>
           </ul>
-        {% endfor %}
+        {#{% endfor %}#}
       {% endfor %}
 
       <div class="line"></div>
@@ -72,9 +72,16 @@
         </ul>
       </div>
 
-        {{ render(controller(
-        'YangBoDreamBlogBundle:Article:rightNewsSkeleton'))
-        }}
+      {{ render(controller('YangBoDreamBlogBundle:Article:rightNewsNoLinksSkeleton')) }}
+      {#<div class="news">#}
+        {#{{ render(controller(#}
+          {#'YangBoDreamBlogBundle:Article:rightNewestArticlesSkeleton'))#}
+        {#}}#}
+
+        {#{{ render(controller(#}
+          {#'YangBoDreamBlogBundle:Article:rightMostViewArticlesSkeleton'))#}
+        {#}}#}
+      {#</div>#}
 
       <div class="visitors">
         <h3><p>最近访客</p></h3>

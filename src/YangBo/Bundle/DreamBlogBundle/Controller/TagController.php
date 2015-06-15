@@ -20,8 +20,7 @@ class TagController extends Controller
         $count = $tag_repository
             ->countArticleWithTag($tag)
         ;
-        dump($count);
-        die();
+
         // 总页数
         $last_page_number = ceil($count/$max_tags_on_index);
         // 上一页
@@ -31,11 +30,13 @@ class TagController extends Controller
         // 分页 偏移量 切记： 分页总是从第一页开始 而数据库的偏移量 默认从0开始
         $offset = $max_tags_on_index * ($page-1);
 
-        $tag_repository = $em->getRepository('YangBoDreamBlogBundle:Tag');
+//        $tag_repository = $em->getRepository('YangBoDreamBlogBundle:Tag');
 
         $tag_articles = $tag_repository
             ->getArticleWithTag($tag, $offset, $max_tags_on_index)
         ;
+//        dump($tag_articles);
+//        die;
         return $this->render('YangBoDreamBlogBundle:Tag:index.html.twig',
             array(
                 'tag_articles' => $tag_articles,

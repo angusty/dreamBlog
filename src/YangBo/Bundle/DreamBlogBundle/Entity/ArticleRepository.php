@@ -3,6 +3,7 @@
 namespace YangBo\Bundle\DreamBlogBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
@@ -88,8 +89,54 @@ class ArticleRepository extends EntityRepository
 
     public function getArticleWithTag($tag = '', $offset = 0, $limit = '')
     {
+        $where = '';
+        if (!empty($tag)) {
+            $where .= 'AND tags.tag_name LIKE :tag_name ';
+        }
+//        $where .= 'AND article.title = \'a\'';  # 单引号 注意$dql是双引号 这里只能是单引号 坑了
+        if (!empty($where)) {
+            $where = 'WHERE ' . ltrim($where, 'AND');
+        }
 
+//        $dql = "SELECT
+//                  article,
+//                  group_concat(tags.tag_name SEPARATOR ',') AS t  #加上这个条件 循环不出来数据
+//                FROM
+//                  YangBoDreamBlogBundle:Article article
+//                LEFT JOIN
+//                  article.tags tags
+//                {$where}
+//                GROUP BY
+//                  article.id";
+        $dql = "SELECT
+                  article
+                FROM
+                  YangBoDreamBlogBundle:Article article
+                LEFT JOIN
+                  article.tags tags
+                {$where}
+                GROUP BY
+                  article.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        if (!empty($tag)) {
+            $query->setParameter('tag_name', '%' . $tag . '%');
+        }
+
+        if (!empty($offset)) {
+            $query->setFirstResult($offset);
+        }
+        if (!empty($limit)) {
+            $query->setMaxResults($limit);
+        }
+        $article_tags = '';
+        try {
+            $article_tags = $query->getResult();
+        } catch (NoResultException $e) {
+            $article_tags = '';
+        }
+        return $article_tags;
     }
-
 
 }
