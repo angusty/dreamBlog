@@ -7,6 +7,6 @@ class TagControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        
+
     }
 }

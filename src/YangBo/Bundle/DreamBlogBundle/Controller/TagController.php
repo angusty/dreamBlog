@@ -10,6 +10,10 @@ class TagController extends Controller
 //    public function indexAction(Request $request, $tag, $page)
     public function indexAction(Request $request)
     {
+//        echo $this->get('translator')
+//            ->transChoice('{1}1个水果|{5}%count%个水果复数', 1, array('%count%' => 10), 'date');
+//        echo $this->get('translator')->trans('ago');
+
         $tag = $request->query->get('tag');
         $page = $request->query->get('page');
         $page = empty($page) ? 1 : $page;
