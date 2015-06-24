@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="{{ asset('bundles/yangbodreamblog/images/favicon.ico') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/yangbodreamblog/css/login.css') }}" />
+</head>
+  <body>
+    <!-----start-main---->
+    <div class="main">
+      <div class="login-form">
+        <h1>登录</h1>
+        <div class="head">
+          <img src="{{ asset('bundles/yangbodreamblog/images/user.png') }}" alt=""/>
+        </div>
+        <form  method="post" action="" >
+          <input type="text" name="loginName" class="text" value="账号" />
+          <input type="password" name="loginPwd"/>
+          <div class="submit">
+            <input type="submit" value="LOGIN" />
+            <p style="color:red;margin-bottom:5px;"></p>
+          </div>
+          <p><a href="#">忘记密码 ?</a></p>
+        </form>
+      </div>
+      <!--//End-login-form-->
+    </div>
+  <!-----//end-main---->
+  <script src="{{ asset('bundles/yangbodreamblog/js/jquery-1.11.3.js') }}"></script>
+
+  </body>
+</html>

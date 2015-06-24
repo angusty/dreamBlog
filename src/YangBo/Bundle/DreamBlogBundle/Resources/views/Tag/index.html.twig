@@ -19,7 +19,8 @@
         {#{% for key,article in articles  if key !='t' %}#}
           <h2>{{ article.title }}</h2>
           <p class="dateview">
-            <span>发布时间：{{ article.createdat|time_diff }}</span><span>作者：{{ article.user.nickname }}</span>
+            {#<span>发布时间：{{ article.createdat|time_diff }}</span><span>作者：{{ article.user.nickname }}</span>#}
+            <span>发布时间：{{ article.createdat|date('Y-m-d H:s') }}</span><span>作者：{{ article.user.nickname }}</span>
             <span>分类：
               [
               {% for category in article.categories %}

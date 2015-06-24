@@ -1,0 +1,12 @@
+yang_bo_dream_blog_admin_login_check:
+    path: /login_check
+
+yang_bo_dream_blog_admin_login:
+    path: /login
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:login
+
+yang_bo_dream_blog_admin_test:
+    path: /test
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:test

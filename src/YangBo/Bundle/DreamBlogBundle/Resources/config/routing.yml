@@ -10,3 +10,7 @@ yang_bo_dream_blog_article:
 yang_bo_dream_blog_tag:
     resource: '@YangBoDreamBlogBundle/Resources/config/routing/tag.yml'
     prefix: /tag
+
+yang_bo_dream_blog_admin:
+    resource: '@YangBoDreamBlogBundle/Resources/config/routing/admin.yml'
+    prefix: /admin
