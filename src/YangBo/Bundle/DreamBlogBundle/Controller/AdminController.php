@@ -18,6 +18,6 @@ class AdminController extends Controller
 
     public function testAction()
     {
-        return new Response();
+        return new Response('Admin page');
     }
 }

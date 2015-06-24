@@ -6,6 +6,9 @@ yang_bo_dream_blog_admin_login:
     defaults:
         _controller: YangBoDreamBlogBundle:Admin:login
 
+yang_bo_dream_blog_admin_logout:
+    path: /logout
+
 yang_bo_dream_blog_admin_test:
     path: /test
     defaults:
