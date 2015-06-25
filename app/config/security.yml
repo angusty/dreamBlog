@@ -20,16 +20,19 @@ security:
         default:
             anonymous: ~
             http_basic: ~
-#            form_login:
-#                login_path: /admin/login
-#                check_path: /admin/login_check
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login_check
             logout:
                 path: /admin/logout
                 target: /
 
 
     access_control:
-        - { path: ^/admin/test, roles: ROLE_ADMIN }
+        - { path: ^/admin/login|^/admin/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: [ROLE_ADMIN]}
+
 
     encoders:
 #        Symfony\Component\Security\Core\User\User: plaintext

@@ -8,15 +8,23 @@
 </head>
   <body>
     <!-----start-main---->
+    {% if error %}
+      <center>{{ error.messageKey|trans(error.messageData, 'security') }}</center>
+    {% endif %}
+
+    {#{% if error %}#}
+      {#<center>{{ error.message|trans }}</center>#}
+    {#{% endif %}#}
+
     <div class="main">
       <div class="login-form">
         <h1>登录</h1>
         <div class="head">
           <img src="{{ asset('bundles/yangbodreamblog/images/user.png') }}" alt=""/>
         </div>
-        <form  method="post" action="" >
-          <input type="text" name="loginName" class="text" value="账号" />
-          <input type="password" name="loginPwd"/>
+        <form  method="post" action="{{ path('yang_bo_dream_blog_admin_login_check') }}" >
+          <input type="text" name="_username" id="username"  value="{{ last_username }}" class="text" />
+          <input type="password" id="password" name="_password"/>
           <div class="submit">
             <input type="submit" value="LOGIN" />
             <p style="color:red;margin-bottom:5px;"></p>
