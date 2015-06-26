@@ -19,9 +19,7 @@ class AdminController extends Controller
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $last_username = $authenticationUtils->getLastUsername();
-        $author = $request->request->all();
-        $errors = $this->get('validator')->validate($author);
-        dump($author);
+
 //        dump($error->getMessageKey());
 //        dump($error->getMessageData());
         return $this->render(

@@ -2,6 +2,7 @@
 
 namespace YangBo\Bundle\DreamBlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\Role\Role;
@@ -55,6 +56,10 @@ class User implements
     private $created_at;
 
     /**
+     * @var string
+     */
+    private $roles;
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $articles;
@@ -76,6 +81,8 @@ class User implements
     {
         return $this->id;
     }
+
+    
 
     /**
      * Set username
@@ -316,6 +323,9 @@ class User implements
     public function getRoles()
     {
         // TODO: Implement getRoles() method.
+//        return array('ROLE_ADMIN');
+
+        return array($this->roles);
     }
 
     /**
@@ -327,5 +337,34 @@ class User implements
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setRolesOnPrePersist()
+    {
+//        $new_array = new ArrayCollection();
+//        $new_array->add('ROLE_USER');
+        // Add your code here
+        if (null === $this->roles) {
+            $this->roles = 'ROLE_USER';
+        }
     }
 }

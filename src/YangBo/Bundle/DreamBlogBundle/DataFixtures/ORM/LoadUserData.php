@@ -30,7 +30,7 @@ class LoadUserData extends AbstractFixture implements
         $user->setUsername('李华');
 //        $user->setPassword('oneByone');
         $password = 'admin';
-        $salt = 'aha';
+        $salt = 'ahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaaha';
         $user->setSalt($salt);
         $encoder = $this->container
             ->get('security.encoder_factory')
@@ -48,7 +48,7 @@ class LoadUserData extends AbstractFixture implements
         $user = new User();
         $user->setUsername('李华2');
         $password = 'oneByOne';
-        $salt = 'one';
+        $salt = 'ahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaaha';
         $user->setSalt($salt);
         $encoder = $this->container
             ->get('security.encoder_factory')
@@ -84,7 +84,7 @@ class LoadUserData extends AbstractFixture implements
         $user = new User();
         $user->setUsername('yangbo2');
         $password = 'admin';
-        $salt = 'aha';
+        $salt = 'ahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaahaaha';
         $user->setSalt($salt);
         $encoder = $this->container
             ->get('security.encoder_factory')
@@ -98,6 +98,24 @@ class LoadUserData extends AbstractFixture implements
         $user->setCreatedAt($now);
         $manager->persist($user);
         $this->addReference('user4', $user);
+
+        $user = new User();
+        $user->setUsername('admin');
+        $password = 'admin';
+        $salt = 'adminadminadminadminadminadmin';
+        $user->setSalt($salt);
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($user);
+        $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
+        $user->setSex(true);
+        $user->setNickname('lihua2');
+        $last_date = new \DateTime('2015-12-12');
+        $user->setUpdatedAt($last_date);
+        $now = new \DateTime();
+        $user->setCreatedAt($now);
+        $manager->persist($user);
+        $this->addReference('user5', $user);
 
         $manager->flush();
         

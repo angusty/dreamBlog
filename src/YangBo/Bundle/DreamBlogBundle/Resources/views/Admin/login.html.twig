@@ -25,6 +25,8 @@
         <form  method="post" action="{{ path('yang_bo_dream_blog_admin_login_check') }}" >
           <input type="text" name="_username" id="username"  value="{{ last_username }}" class="text" />
           <input type="password" id="password" name="_password"/>
+          <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+          <label for="remember_me">记住我</label>
           <div class="submit">
             <input type="submit" value="LOGIN" />
             <p style="color:red;margin-bottom:5px;"></p>

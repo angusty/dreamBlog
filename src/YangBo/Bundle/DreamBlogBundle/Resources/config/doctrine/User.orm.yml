@@ -31,9 +31,12 @@ YangBo\Bundle\DreamBlogBundle\Entity\User:
             type: datetime
         created_at:
             type: datetime
+        roles:
+            type: string
+            length: 100
     oneToMany:
         articles:
             targetEntity: Article
             mappedBy: user
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtOnPrePersist ]
+        prePersist: [ setCreatedAtOnPrePersist, setRolesOnPrePersist ]
