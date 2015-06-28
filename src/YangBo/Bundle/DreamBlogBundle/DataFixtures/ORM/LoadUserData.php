@@ -109,6 +109,7 @@ class LoadUserData extends AbstractFixture implements
             ->getEncoder($user);
         $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
         $user->setSex(true);
+        $user->setRoles('ROLE_ADMIN');
         $user->setNickname('lihua2');
         $last_date = new \DateTime('2015-12-12');
         $user->setUpdatedAt($last_date);

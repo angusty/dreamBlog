@@ -2,17 +2,17 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [user_db]
-#        in_memory:
-#            memory:
-#                users:
-#                    yangbo:
-#                        password: yangbo
-#                        roles: 'ROLE_USER'
-#                    admin:
-##                        password: admin
-#                        password: $2a$12$RmpmIzzghQKJSzwjbXw9aetE81V.n4hbMfIL4ILs/slrtpUyY5ode
-#                        roles: 'ROLE_ADMIN'
+                providers: [in_memory, user_db]
+        in_memory:
+            memory:
+                users:
+                    yangbo:
+                        password: yangbo
+                        roles: 'ROLE_USER'
+                    admins:
+#                        password: adminadmin
+                        password: $2a$12$wNeWwCP7eBSojIf/NoOLl.s.hlao5alyliRhdj4gEQyqIVAl.wD4y
+                        roles: 'ROLE_ADMIN'
         user_db:
             entity: { class: YangBo\Bundle\DreamBlogBundle\Entity\User, property:username }
 
@@ -48,12 +48,12 @@ security:
 #        Symfony\Component\Security\Core\User\User: plaintext
 #        YangBo\Bundle\DreamBlogBundle\Entity\User: sha512
 
-#        Symfony\Component\Security\Core\User\User:
-#            algorithm: bcrypt
-#            cost: 12
-
         YangBo\Bundle\DreamBlogBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
 
+
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
 

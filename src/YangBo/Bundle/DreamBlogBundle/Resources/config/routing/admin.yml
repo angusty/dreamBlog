@@ -9,6 +9,17 @@ yang_bo_dream_blog_admin_login:
 yang_bo_dream_blog_admin_logout:
     path: /logout
 
+yang_bo_dream_blog_admin_main:
+    path: /main
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:main
+
+yang_bo_dream_blog_admin_system:
+    path: /system
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:system
+
+
 yang_bo_dream_blog_admin_test:
     path: /test
     defaults:

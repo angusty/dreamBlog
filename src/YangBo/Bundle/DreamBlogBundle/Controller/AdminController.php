@@ -31,6 +31,16 @@ class AdminController extends Controller
         );
     }
 
+    public function mainAction()
+    {
+        return $this->render('YangBoDreamBlogBundle:Admin:main.html.twig');
+    }
+
+    public function systemAction()
+    {
+        return $this->render('YangBoDreamBlogBundle:Admin:system.html.twig');
+    }
+
     public function testAction()
     {
         return new Response('Admin page');

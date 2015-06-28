@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{% block title %} dream blog 后台管理系统 {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="{{ asset('bundles/yangbodreamblog/images/favicon.ico') }}"/>
+    {% block stylesheets %}
+      <link href="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/css/main.css" rel="stylesheet" type="text/css" />
+    {% endblock %}
+  </head>
+  <body>
+    {% block bodys %}
+    {% endblock %}
+
+  {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/js/bui-min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/yangbodreamblog/plugins/bui') }}/assets/js/config-min.js"></script>
+  {% endblock %}
+
+  </body>
+</html>
+
