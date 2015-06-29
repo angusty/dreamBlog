@@ -19,6 +19,10 @@ yang_bo_dream_blog_admin_system:
     defaults:
         _controller: YangBoDreamBlogBundle:Admin:system
 
+yang_bo_dream_blog_admin_category:
+    path: /category
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:category
 
 yang_bo_dream_blog_admin_test:
     path: /test

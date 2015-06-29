@@ -8,8 +8,15 @@
 
 {% block bodys %}
   <table class="list">
-    <volist name="info" id="v">
-      <tr class="row" ><td width="15%"></td><td></td></tr>
-    </volist>
+    {% for key,info in system_infos %}
+      <tr class="row" >
+        <td width="25%">
+          {{ key }}
+        </td>
+        <td>
+          {{ info|raw }}
+        </td>
+      </tr>
+    {% endfor %}
   </table>
 {% endblock %}

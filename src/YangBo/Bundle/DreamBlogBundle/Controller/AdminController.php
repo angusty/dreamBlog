@@ -36,9 +36,39 @@ class AdminController extends Controller
         return $this->render('YangBoDreamBlogBundle:Admin:main.html.twig');
     }
 
+    /**
+     * 系统概览
+     * @return Response
+     */
     public function systemAction()
     {
-        return $this->render('YangBoDreamBlogBundle:Admin:system.html.twig');
+        $system_infos = [
+            '操作系统' => PHP_OS,
+//            '运行环境' => $_SERVER['SERVER_SFOTWARE'],
+//            'CPU数量' => $_SERVER['PROCESSOR_IDENTIFIER'],
+            '服务器WEB端口' => $_SERVER['SERVER_PORT'],
+            'PHP运行方式' => php_sapi_name(),
+            'PHP版本' => PHP_VERSION . '[ <a href="http://php.net" target="_blank">查看最新版本</a> ]',
+            '上传附件限制' => ini_get('upload_max_filesize'),
+            '执行时间限制' => ini_get('max_execution_time'),
+            '服务器时间' => date('Y-m-d H:s:i'),
+            '北京时间' => gmdate('Y-m-d H:s:i', time()+8*3600),
+            '服务器域名' => $_SERVER['SERVER_NAME'],
+            '服务器ip' => gethostbyname($_SERVER['SERVER_NAME']),
+            '剩余空间' => round((@disk_free_space(".")/(1024*1024)), 2).'M',
+        ];
+        return $this->render(
+            'YangBoDreamBlogBundle:Admin:system.html.twig',
+            array(
+                'system_infos' => $system_infos
+            )
+        );
+    }
+
+
+    public function categoryAction()
+    {
+        return $this->render('YangBoDreamBlogBundle:Admin:category.html.twig');
     }
 
     public function testAction()

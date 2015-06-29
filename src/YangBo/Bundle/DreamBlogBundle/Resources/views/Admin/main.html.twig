@@ -3,15 +3,18 @@
 {% block bodys %}
   <div class="header">
     <div class="dl-title"><span class="">前端框架</span></div>
-    <div class="dl-log">欢迎您，<span class="dl-log-user">XXX</span>
-      <a href="###" title="退出系统" class="dl-log-quit">[退出]</a>
+    {% if null != app.user.username %}
+    <div class="dl-log">欢迎您，<span class="dl-log-user">{{ app.user.username }}</span>
+      {#{{ app.security.getToken().getUsername() }}#}
+      <a href="{{ path('yang_bo_dream_blog_admin_logout') }}" title="退出系统" class="dl-log-quit">[退出]</a>
     </div>
+    {% endif %}
   </div>
   <div class="content">
     <div class="dl-main-nav">
       <ul id="J_Nav"  class="nav-list ks-clear">
         <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">首页</div></li>
-        <li class="nav-item"><div class="nav-item-inner nav-inventory">搜索页</div></li>
+        <li class="nav-item"><div class="nav-item-inner nav-inventory">管理</div></li>
       </ul>
     </div>
     <ul id="J_NavContent" class="dl-tab-conten">
@@ -35,9 +38,9 @@
       },{
         id:'search',
         menu:[{
-          text:'搜索页面',
+          text:'文章管理',
           items:[
-            {id:'introduce',text:'搜索页面简介',href:'search/introduce.html'}
+            {id:'article',text:'文章分类',href:'category'}
           ]
         }]
       }];
