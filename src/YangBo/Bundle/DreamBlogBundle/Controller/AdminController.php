@@ -66,8 +66,27 @@ class AdminController extends Controller
     }
 
 
-    public function categoryAction()
+    public function categoryAction(Request $request)
     {
+        if ($request->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            $data = $em->getRepository('YangBoDreamBlogBundle:Category')
+                ->createQueryBuilder('category')
+                ->getQuery()
+                ->getArrayResult();
+
+            $results = $em
+                ->getRepository('YangBoDreamBlogBundle:Category')
+                ->createQueryBuilder('category')
+                ->select('COUNT(category.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+
+            $return = [ 'rows' => $data, 'results' => $results, 'hasError' => false ];
+            $response = new Response(json_encode($return));
+            $response->headers->set('Content-Type', 'aplication/json');
+            return $response;
+        }
         return $this->render('YangBoDreamBlogBundle:Admin:category.html.twig');
     }
 
