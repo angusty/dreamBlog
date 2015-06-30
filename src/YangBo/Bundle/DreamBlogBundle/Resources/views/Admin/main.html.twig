@@ -14,7 +14,7 @@
         menu:[{
           text:'首页内容',
           items:[
-            {id:'main-menu',text:'系统概览',href:'system'}
+            {id:'main-menu',text:'系统概览',href:'{{ path("yang_bo_dream_blog_admin_system") }}'}
           ]
         }]
       },{
@@ -22,7 +22,8 @@
         menu:[{
           text:'文章管理',
           items:[
-            {id:'article',text:'文章分类',href:'category'}
+            {id: 'category1',text: '文章分类', href:'{{ path("yang_bo_dream_blog_admin_category") }}'},
+            {id: 'category2', text: '文章分类树', href: '{{ path("yang_bo_dream_blog_admin_category_tree") }}' }
           ]
         }]
       }];

@@ -1,0 +1,35 @@
+{% extends 'YangBoDreamBlogBundle::layout.admin.html.twig' %}
+
+{% block bodys %}
+  <div class="container">
+    <div class="detail-page">
+      <h2>分类</h2>
+      <div class="detail-section">
+        <div class="row detail-row">
+          <div class="span8">
+            <label>id：</label><span class="detail-text">{{ category.id }}</span>
+          </div>
+
+        </div>
+        <div class="row detail-row">
+          <div class="span8">
+            <label>父类类别：</label><span class="detail-text">{{ category.parent ?  category.parent.name : '' }}</span>
+          </div>
+        </div>
+
+        <div class="row detail-row">
+          <div class="span8">
+            <label>类别：</label><span class="detail-text">{{ category.name }}</span>
+          </div>
+        </div>
+
+        <div class="row detail-row">
+          <div class="span8">
+            <label>创建时间：</label><span class="detail-text">{{ category.createdAt|date('Y-m-d H:s') }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

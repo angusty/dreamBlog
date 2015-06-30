@@ -65,6 +65,54 @@ class AdminController extends Controller
         );
     }
 
+    public function categoryTreeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categorys =
+            $em->getRepository('YangBoDreamBlogBundle:Category')
+                ->createQueryBuilder('category')
+                ->getQuery()
+                ->getArrayResult();
+//        $category_tree = $this->toTree($categorys, 'id', 'parent_id', 'children');
+        print_r($categorys);
+        return $this->render('YangBoDreamBlogBundle:Admin:category_tree.html.twig');
+    }
+
+    protected function toTree($list = null, $pk = 'id', $pid = 'pid', $child = '_child')
+    {
+        // 创建Tree
+        $tree = array();
+
+        if (is_array($list)) {
+            // 创建基于主键的数组引用
+            $refer = array();
+
+            foreach ($list as $key => $data) {
+                $_key = is_object($data)?$data->$pk:$data[$pk];
+                $refer[$_key] =& $list[$key];
+            }
+            foreach ($list as $key => $data) {
+                // 判断是否存在parent
+                $parentId = is_object($data)?$data->$pid:$data[$pid];
+                $is_exist_pid = false;
+                foreach ($refer as $k => $v) {
+                    if ($parentId==$k) {
+                        $is_exist_pid = true;
+                        break;
+                    }
+                }
+                if ($is_exist_pid) {
+                    if (isset($refer[$parentId])) {
+                        $parent =& $refer[$parentId];
+                        $parent[$child][] =& $list[$key];
+                    }
+                } else {
+                    $tree[] =& $list[$key];
+                }
+            }
+        }
+        return $tree;
+    }
 
     public function categoryAction(Request $request)
     {
@@ -88,6 +136,54 @@ class AdminController extends Controller
             return $response;
         }
         return $this->render('YangBoDreamBlogBundle:Admin:category.html.twig');
+    }
+
+    public function categoryDetailAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em
+            ->getRepository('YangBoDreamBlogBundle:Category')
+            ->find($id);
+//        var_dump($category);
+        return $this->render(
+            'YangBoDreamBlogBundle:Admin:category_detail.html.twig',
+            array(
+                'category' => $category
+            )
+        );
+    }
+
+    public function categoryDeleteAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $ids = $request->query->get('id');
+            $return = [];
+            if (!empty($ids)) {
+                $em = $this->getDoctrine()->getManager();
+                if (is_array($ids)) {
+                    foreach ($ids as $key => $id) {
+                        $category = $em
+                            ->getRepository('YangBoDreamBlogBundle:Category')
+                            ->find($id);
+                        $em->remove($category);
+                    }
+                } else {
+                    $category = $em
+                        ->getRepository('YangBoDreamBlogBundle:Category')
+                        ->find($ids);
+                    $em->remove($category);
+                }
+                $em->flush();
+                $return['status'] = 'success';
+            } else {
+                $return['status'] = 'fail';
+            }
+
+            $response = new Response(json_encode($return));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
     }
 
     public function testAction()

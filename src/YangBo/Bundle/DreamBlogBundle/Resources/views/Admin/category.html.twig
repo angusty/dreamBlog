@@ -16,9 +16,9 @@
           {title:'分类编号',dataIndex:'id',width:80,renderer:function(v){
             return Search.createLink({
               id : 'detail' + v,
-              title : '学生信息',
+              title : '分类信息',
               text : v,
-              href : 'detail/example.html'
+              href : 'category/detail/' + v
             });
           }},
           {title:'父类编号',dataIndex:'parent_id',width:100},
@@ -31,7 +31,7 @@
           {title:'操作',dataIndex:'',width:200,renderer : function(value,obj){
             var editStr =  Search.createLink({ //链接使用 此方式
                 id : 'edit' + obj.id,
-                title : '编辑学生信息',
+                title : '编辑类别',
                 text : '编辑',
                 href : 'search/edit.html'
               }),
@@ -63,6 +63,7 @@
       }
 
       function delItems(items){
+
         var ids = [];
         BUI.each(items,function(item){
           ids.push(item.id);
@@ -71,11 +72,12 @@
         if(ids.length){
           BUI.Message.Confirm('确认要删除选中的记录么？',function(){
             $.ajax({
-              url : '../data/del.php',
+              url : '{{ path("yang_bo_dream_blog_admin_category_delete") }}',
               dataType : 'json',
-              data : {ids : ids},
+              data : {id: ids},
               success : function(data){
-                if(data.success){ //删除成功
+                if(data.status === 'success'){ //删除成功
+                  BUI.Message.Alert('删除成功！');
                   search.load();
                 }else{ //删除失败
                   BUI.Message.Alert('删除失败！');

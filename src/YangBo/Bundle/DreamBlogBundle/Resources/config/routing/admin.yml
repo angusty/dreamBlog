@@ -24,6 +24,20 @@ yang_bo_dream_blog_admin_category:
     defaults:
         _controller: YangBoDreamBlogBundle:Admin:category
 
+yang_bo_dream_blog_admin_category_tree:
+    path: /category/tree
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:categoryTree
+
+yang_bo_dream_blog_admin_category_detail:
+    path: /category/detail/{id}
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:categoryDetail
+
+yang_bo_dream_blog_admin_category_delete:
+    path: /category/delete
+    defaults:
+        _controller: YangBoDreamBlogBundle:Admin:categoryDelete
 yang_bo_dream_blog_admin_test:
     path: /test
     defaults:
