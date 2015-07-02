@@ -9,18 +9,32 @@
   {{ parent() }}
   <script type="text/javascript">
     BUI.use(['bui/tree','bui/data','bui/toolbar','bui/editor'],function (Tree,Data,Toolbar,Editor) {
-      var data = [
-        {text : 'one',id : '1',children: [{text : '11',id : '11'}]},
-        {text : 'two',id : '2',expanded : true,children : [
-          {text : 'one1',id : '21',children : [{text : '211',id : '211'},{text : '212',id : '212'}]},
-          {text : 'two1',id : '22'}
-        ]},
-        {text : '3',id : '3'},
-        {text : '4',id : '4'}
-      ];
+      var data = '';
+      $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: "{{ path('yang_bo_dream_blog_admin_category_tree') }}",
+        data: {},
+        async: false,
+        success: function(msg){
+          data = msg;
+
+        }
+      });
+//      console.log('json');
+//      console.log(data);
+//      var data = [
+//        {text : 'one',id : '1',children: [{text : '11',id : '11'}]},
+//        {text : 'two',id : '2',expanded : true,children : [
+//          {text : 'one1',id : '21',children : [{text : '211',id : '211'},{text : '212',id : '212'}]},
+//          {text : 'two1',id : '22'}
+//        ]},
+//        {text : '3',id : '3'},
+//        {text : '4',id : '4'}
+//      ];
 
       var tree = new Tree.TreeList({
-        render : '#t1',
+        render : '#category',
         showLine : true,
         height:300,
         nodes : data
@@ -41,17 +55,72 @@
 
       editor.on('accept',function(){
         var text = editor.getValue(),
-          node = editor.get('curNode');
-        node.text = text;
-        store.update(node);
+          node = editor.get('curNode'),
+          selectedNode = tree.getSelected();
+        var parent_id = '',
+            id = '',
+            name = text;
+
+        if (node == selectedNode) {
+          if (selectedNode != null) {
+            id = selectedNode.id;
+            parent_id = selectedNode.parent_id;
+          }
+          //修改
+          $.ajax({
+            type: "POST",
+            dataType: 'JSON',
+            url: "{{ path('yang_bo_dream_blog_admin_category_update') }}",
+            data: {
+              id: id,
+              parent_id: parent_id,
+              name: name
+            },
+            //          async: false,
+            success: function(msg){
+              console.log(msg);
+              if (msg.status === 1) {
+                node.parent_id = msg.data.parent_id;
+                node.id = msg.data.id;
+                node.text = msg.data.name;
+                store.update(node);
+              }
+
+            }
+          });
+        } else {
+          if (selectedNode != null) {
+            parent_id = selectedNode.id;
+          }
+          //添加
+          $.ajax({
+          type: "POST",
+          dataType: 'JSON',
+          url: "{{ path('yang_bo_dream_blog_admin_category_add') }}",
+          data: {
+          parent_id: parent_id,
+          name: name
+          },
+          //          async: false,
+          success: function(msg){
+           if (msg.status == 1) {
+             node.parent_id = msg.data.parent_id;
+             node.id = msg.data.id;
+             node.text = msg.data.name;
+             store.update(node);
+           }
+          }
+          });
+        }
+
       });
 
       //显示编辑器
       function showEditor(node){
         var element = tree.findElement(node);
         editor.setValue(node.text);
-
         editor.set('curNode',node); //缓存当前编辑的记录
+//        console.log(node);
         editor.set('align',{ //设置对齐
           node : $(element).find('.x-tree-icon-wraper'),
           points : ['tr','tl']
@@ -77,8 +146,11 @@
             handler : function(){
               var selectedNode = tree.getSelected(),
                 newNode = {text : '新增节点'};
+//              console.log('selectedNode:');
+//              console.log(selectedNode);
               newNode = store.add(newNode,selectedNode);
               tree.expandNode(selectedNode);
+
               showEditor(newNode);
             }
           },
@@ -89,7 +161,23 @@
             handler : function(){
               var selectedNode = tree.getSelected();
               if(selectedNode){
-                store.remove(selectedNode);
+                var id = selectedNode.id;
+                $.ajax({
+                  type: "POST",
+                  dataType: 'JSON',
+                  url: "{{ path('yang_bo_dream_blog_admin_category_delete') }}",
+                  data: {
+                    id: id
+                  },
+//                  async: false,
+                  success: function(msg){
+                    if (msg.status == 1) {
+                      console.log(msg);
+                      store.remove(selectedNode);
+                    }
+                  }
+                });
+
               }
 
             }
@@ -109,7 +197,7 @@
             <h3 class="pull-left">双击编辑树</h3>
             <div id="tbar" class="pull-right"></div>
           </div>
-          <div class="panel-body" id= "t1">
+          <div class="panel-body" id= "category">
 
           </div>
         </div>

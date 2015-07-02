@@ -230,4 +230,60 @@ class Category
             $this->setCreatedAt(new \DateTime());
         }
     }
+    /**
+     * @var integer
+     */
+    private $parent_id;
+
+
+    /**
+     * Set parent_id
+     *
+     * @param integer $parentId
+     * @return Category
+     */
+    public function setParentId($parentId)
+    {
+        $this->parent_id = $parentId;
+
+        return $this;
+    }
+
+    /**
+     * Get parent_id
+     *
+     * @return integer 
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+    /**
+     * @var integer
+     */
+    private $order;
+
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return Category
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
 }

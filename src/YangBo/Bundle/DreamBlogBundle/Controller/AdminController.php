@@ -1,9 +1,12 @@
 <?php
 namespace YangBo\Bundle\DreamBlogBundle\Controller;
 
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use YangBo\Bundle\DreamBlogBundle\Entity\Category;
 
 class AdminController extends Controller
 {
@@ -67,18 +70,100 @@ class AdminController extends Controller
 
     public function categoryTreeAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $categorys =
-            $em->getRepository('YangBoDreamBlogBundle:Category')
-                ->createQueryBuilder('category')
-                ->getQuery()
-                ->getArrayResult();
-//        $category_tree = $this->toTree($categorys, 'id', 'parent_id', 'children');
-        print_r($categorys);
+        if ($request->isXmlHttpRequest() && $request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $categorys =
+                $em->getRepository('YangBoDreamBlogBundle:Category')
+                    ->createQueryBuilder('category')
+                    ->select('category.id,category.name as text, category.parent_id as parent_id')
+//                    ->addselect('category.name as text')
+                    ->orderBy('category.sort', 'ASC')
+                    ->getQuery()
+                    ->getArrayResult();
+            $category_tree = $this->toTree($categorys, 'id', 'parent_id', 'children');
+//            var_dump($category_tree);
+            $response = new Response(json_encode($category_tree));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
         return $this->render('YangBoDreamBlogBundle:Admin:category_tree.html.twig');
     }
+    public function categoryUpdateAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && $request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $id = $request->request->get('id');
+            $return = ['status'=>0];
+            if (!empty($id)) {
+                $parent_id = $request->get('parent_id');
+                $parent = null;
+                if (!empty($parent_id)) {
+                    $parent =
+                        $em
+                            ->getRepository('YangBoDreamBlogBundle:Category')
+                            ->find($parent_id);
+                }
+                $name = $request->request->get('name');
+                $category =
+                    $em
+                        ->getRepository('YangBoDreamBlogBundle:Category')
+                        ->find($id);
+//                $category->setParentId($parent_id);
+                $category->setParent($parent);
+                $category->setName($name);
+                try {
+                    $em->flush();
+                    $return['status'] = 1;
+                    $return['msg'] = '修改成功';
+                    $return['data']['id'] = $category->getId();
+                    $return['data']['name'] = $category->getName();
+                    $return['data']['parent_id'] = $category->getParentId();
+                } catch (ORMException $e) {
+                    $return['msg'] = $e->getMessage();
+                }
+            }
 
-    protected function toTree($list = null, $pk = 'id', $pid = 'pid', $child = '_child')
+            $response = new Response(json_encode($return));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+    }
+    public function categoryAddAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest() && $request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $return = ['status'=>0];
+            $parent_id = $request->request->get('parent_id');
+            $name = $request->request->get('name');
+            $parent =
+                $em
+                    ->getRepository('YangBoDreamBlogBundle:Category')
+                    ->find($parent_id);
+            $category = new Category();
+            $category->setParent($parent);
+            $category->setName($name);
+            $em->persist($category);
+            try {
+                $em->flush();
+                $return['data']['id'] = $category->getId();
+                $return['data']['parent_id'] = $category->getParentId();
+                $return['data']['name'] = $category->getName();
+                $return['status'] = 1;
+                $return['msg'] = 'insert ok';
+            } catch (ORMException $e) {
+                $return['status'] = 0;
+                $return['msg'] = $e->getMessage();
+            }
+
+            $response = new Response(json_encode($return));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+    }
+
+    protected function toTree($list = null, $pk = 'id', $pid = 'pid', $child = '_children')
     {
         // 创建Tree
         $tree = array();
@@ -156,8 +241,14 @@ class AdminController extends Controller
     public function categoryDeleteAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $ids = $request->query->get('id');
-            $return = [];
+            $ids = '';
+            if ($request->isMethod('GET')) {
+                $ids = $request->query->get('id');
+            } else if ($request->isMethod('POST')) {
+                $ids = $request->request->get('id');
+            }
+
+            $return = ['status' => 1];
             if (!empty($ids)) {
                 $em = $this->getDoctrine()->getManager();
                 if (is_array($ids)) {
@@ -173,10 +264,17 @@ class AdminController extends Controller
                         ->find($ids);
                     $em->remove($category);
                 }
-                $em->flush();
-                $return['status'] = 'success';
+                try {
+                    $em->flush();
+                    $return['status'] = 1;
+                } catch (ORMException $e) {
+                    $return['status'] = 0;
+                    $return['msg'] = $e->getMessage();
+                }
+
             } else {
-                $return['status'] = 'fail';
+                $return['status'] = '0';
+                $return['msg'] = 'id 不能为空';
             }
 
             $response = new Response(json_encode($return));

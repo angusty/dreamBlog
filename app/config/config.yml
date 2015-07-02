@@ -74,6 +74,9 @@ doctrine:
         dql:
             string_functions:
                 group_concat: DoctrineExtensions\Query\Mysql\GroupConcat
+        mappings:
+            translatable:
+                type: annotation
 
 # Swiftmailer Configuration
 swiftmailer:

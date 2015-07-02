@@ -11,8 +11,12 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
         name:
             type: string
             length: 200
-#        pid:
-#            type: integer
+        parent_id:
+            type: integer
+            nullable: true
+        sort:
+            type: integer
+            nullable: true
         updated_at:
             type: datetime
             nullable: true
@@ -43,8 +47,9 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
         parent:
             targetEntity: Category
             inversedBy: childen
-#            joinColumns:
-#                pid:
-#                    referencedColumnName: id
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
     lifecycleCallbacks:
         prePersist: [ setCreatedAtOnPrePersist ]

@@ -8,3 +8,8 @@ services:
 #        arguments: [@translator]
         tags:
             - { name: twig.extension }
+
+    sort.autoincrement.listener:
+        class: YangBo\Bundle\DreamBlogBundle\EventListener\SortAutoIncrement
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }

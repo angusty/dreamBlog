@@ -56,6 +56,10 @@ class User implements
     private $created_at;
 
     /**
+     * @var string
+     */
+    private $roles;
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $articles;
@@ -320,7 +324,8 @@ class User implements
     {
         // TODO: Implement getRoles() method.
 //        return array('ROLE_ADMIN');
-        return $this->roles;
+
+        return array($this->roles);
     }
 
     /**
@@ -333,10 +338,7 @@ class User implements
     {
         // TODO: Implement eraseCredentials() method.
     }
-    /**
-     * @var string
-     */
-    private $roles;
+
 
 
     /**
@@ -347,9 +349,7 @@ class User implements
      */
     public function setRoles($roles)
     {
-        if (empty($roles)) {
-            $roles = 'ROLE_USER';
-        }
+
         $this->roles = $roles;
 
         return $this;
@@ -360,6 +360,11 @@ class User implements
      */
     public function setRolesOnPrePersist()
     {
+//        $new_array = new ArrayCollection();
+//        $new_array->add('ROLE_USER');
         // Add your code here
+        if (null === $this->roles) {
+            $this->roles = 'ROLE_USER';
+        }
     }
 }

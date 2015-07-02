@@ -76,7 +76,7 @@
               dataType : 'json',
               data : {id: ids},
               success : function(data){
-                if(data.status === 'success'){ //删除成功
+                if(data.status === '1'){ //删除成功
                   BUI.Message.Alert('删除成功！');
                   search.load();
                 }else{ //删除失败
