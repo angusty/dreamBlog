@@ -2,6 +2,10 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
     type: entity
     table: category
     repositoryClass: YangBo\Bundle\DreamBlogBundle\Entity\CategoryRepository
+    softdelete:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
     id:
         id:
             type: integer
@@ -22,6 +26,9 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
             nullable: true
         created_at:
             type: datetime
+        deletedAt:
+            type: date
+            nullable: true
 #    manyToMany:
 #        articles:
 #            targetEntity: Article

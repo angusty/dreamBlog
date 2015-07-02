@@ -258,32 +258,61 @@ class Category
     {
         return $this->parent_id;
     }
+
     /**
      * @var integer
      */
-    private $order;
+    private $sort;
 
 
     /**
-     * Set order
+     * Set sort
      *
-     * @param integer $order
+     * @param integer $sort
      * @return Category
      */
-    public function setOrder($order)
+    public function setSort($sort)
     {
-        $this->order = $order;
+        $this->sort = $sort;
 
         return $this;
     }
 
     /**
-     * Get order
+     * Get sort
      *
      * @return integer 
      */
-    public function getOrder()
+    public function getSort()
     {
-        return $this->order;
+        return $this->sort;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $deletedAt;
+
+
+    /**
+     * Set deletedAt
+     *
+     * @param \DateTime $deletedAt
+     * @return Category
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deletedAt
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
     }
 }
