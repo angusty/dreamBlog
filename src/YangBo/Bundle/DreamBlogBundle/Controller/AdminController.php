@@ -72,6 +72,7 @@ class AdminController extends Controller
     {
         if ($request->isXmlHttpRequest() && $request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
+            $em->getFilters()->disable('softdeleteable');
             $categorys =
                 $em->getRepository('YangBoDreamBlogBundle:Category')
                     ->createQueryBuilder('category')

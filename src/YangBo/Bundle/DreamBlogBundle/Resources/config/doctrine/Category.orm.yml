@@ -2,10 +2,10 @@ YangBo\Bundle\DreamBlogBundle\Entity\Category:
     type: entity
     table: category
     repositoryClass: YangBo\Bundle\DreamBlogBundle\Entity\CategoryRepository
-    softdelete:
+    gedmo:
         soft_deleteable:
             field_name: deletedAt
-            time_aware: false
+            time_aware: true
     id:
         id:
             type: integer
