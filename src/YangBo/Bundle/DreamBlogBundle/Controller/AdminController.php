@@ -72,7 +72,8 @@ class AdminController extends Controller
     {
         if ($request->isXmlHttpRequest() && $request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
-            $em->getFilters()->disable('softdeleteable');
+//            $em->getFilters()->enable('softdeleteable');
+//            $em->getFilters()->disable('softdeleteable');
             $categorys =
                 $em->getRepository('YangBoDreamBlogBundle:Category')
                     ->createQueryBuilder('category')
@@ -258,12 +259,20 @@ class AdminController extends Controller
                             ->getRepository('YangBoDreamBlogBundle:Category')
                             ->find($id);
                         $em->remove($category);
+                        $childrens = $category->getChildren();
+                        foreach ($childrens as $children) {
+                            $em->remove($children);
+                        }
                     }
                 } else {
                     $category = $em
                         ->getRepository('YangBoDreamBlogBundle:Category')
                         ->find($ids);
                     $em->remove($category);
+                    $childrens = $category->getChildren();
+                    foreach ($childrens as $children) {
+                        $em->remove($children);
+                    }
                 }
                 try {
                     $em->flush();
