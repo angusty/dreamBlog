@@ -29,10 +29,10 @@ security:
                 login_path: /admin/login
                 check_path: /admin/login_check
             remember_me:
-                            key: "%secret%"
-                            name: yang_bo_dream_blog_admin_remember  #cookie name
-                            lifetime: 604800
-                            path: /
+                key: "%secret%"
+                name: yang_bo_dream_blog_admin_remember  #cookie name
+                lifetime: 604800
+                path: /
             logout:
                 path: /admin/logout
                 target: /

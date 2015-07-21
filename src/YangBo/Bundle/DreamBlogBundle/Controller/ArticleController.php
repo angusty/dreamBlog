@@ -20,6 +20,9 @@ class ArticleController extends Controller
             if (null === $article) {
                 throw $this->createNotFoundException('不存在的文章');
 //                throw new NotFoundHttpException('不存在的文章');
+            } else {
+                $article->setPageViewCount($article->getPageViewCount()+1);
+                $em->flush();
             }
         }
 

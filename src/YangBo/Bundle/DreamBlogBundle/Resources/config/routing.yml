@@ -14,3 +14,7 @@ yang_bo_dream_blog_tag:
 yang_bo_dream_blog_admin:
     resource: '@YangBoDreamBlogBundle/Resources/config/routing/admin.yml'
     prefix: /admin
+
+yang_bo_dream_blog_api:
+    resource: '@YangBoDreamBlogBundle/Resources/config/routing/api.yml'
+    prefix: /api

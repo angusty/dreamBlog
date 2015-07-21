@@ -1,0 +1,6 @@
+yang_bo_dream_blog_api_test:
+    path: /test.{_format}
+    defaults:
+        _controller: YangBoDreamBlogBundle:Api:test
+    requirements:
+        _format: html|php
