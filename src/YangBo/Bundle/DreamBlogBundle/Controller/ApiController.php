@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends Controller
 {
     /**
-     * ≤‚ ‘jsonp
+     * jsonp
      * @param Request $request
      * @return jsonp
      */
