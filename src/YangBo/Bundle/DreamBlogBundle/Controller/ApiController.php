@@ -9,14 +9,15 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends Controller
 {
     /**
-     * ²âÊÔjsonp
+     * æµ‹è¯• jsonp
      * @param Request $request
      * @return jsonp
      */
     public function testAction(Request $request)
     {
         $callback = $request->query->get('callback');
-        $code = $request->query->get('code') ? $request->query->get('code') : 'hello';
+//        $code = $request->query->get('code') ? $request->query->get('code') : 'hello';
+        $code = $request->query->get('code');
         $return = ['status' => 0];
         switch ($callback) {
             case 'getAll':
